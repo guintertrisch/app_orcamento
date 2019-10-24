@@ -1,7 +1,7 @@
 # app_orcamento
 Cadastro de Orçamentos
 
---->Funcionalidades
+-Funcionalidades
 -Cadastro de Orçamentos
 -Saida em PDF
 -Listagem de Orçamentos
