@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-4 col-md-offset-4">
+    <h2>Cadastro de Orçamentos</h2>
+<form action="" method="POST">
+    {{ form.csrf_token}}
+    <div class="form-group">
+        <label>Cliente</label>
+        {{form.cliente(class="form-control",placeholder="nome do cliente")}}
+    </div>
+    <div class="form-group">
+        <label>Contato</label>
+        {{form.contato(class="form-control",placeholder="contato do cliente")}}
+    </div>
+    <div class="form-group">
+        <label>Local</label>
+        {{form.local(class="form-control",placeholder="endereço do cliente")}}
+    </div>
+    <div class="form-group">
+        <label>Data</label>
+        {{form.data(class="form-control",placeholder="dd/mm/yyyy")}}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Gravar</button>
+
+</form>
+</div>
+
+{% endblock %}
