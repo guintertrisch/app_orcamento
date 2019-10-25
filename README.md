@@ -14,7 +14,7 @@ Funcionalidades:
  
  Clone:
   
-  - git clone <repo>
+  - git clone https://github.com/guintertrisch/app_orcamento.git
   
  Criação do ambiente virtual para instalar dependencias do projeto:
  
