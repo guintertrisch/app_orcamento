@@ -50,4 +50,10 @@ def teste(info):
 def orcamento():
     return render_template('cad_orcamento.html')
 
+@app.route("/chama",methods =["GET"])
+def chamametodo():
+    return render_template('metodo.html')
 
+@app.route("/ok",methods =["GET","POST"])
+def chamou():
+    return "<h>oka</h>"

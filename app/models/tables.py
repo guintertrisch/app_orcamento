@@ -9,8 +9,6 @@ class Cliente(db.Model):
     local = db.Column(db.String)
     data = db.Column(db.String)
     descricao = db.Column(db.String)
-    orcamento = db.relationship('Orcamento',backref='cliente')
-
 
     def __init__(self,nome, contato,local,data,descricao):
         self.nome = nome
@@ -18,7 +16,6 @@ class Cliente(db.Model):
         self.local = local
         self.data = data
         self.descricao = descricao
-
 
     def __repr__(self):
         return "<Nome %r>" % self.nome
@@ -32,8 +29,9 @@ class Orcamento(db.Model):
     detalhe = db.Column(db.String)
     acao = db.Column(db.String)
     valor = db.Column(db.String)
-    observacao = db.Column(db.String, nullable=True)
-    cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'),nullable=False)
+    observacao = db.Column(db.String, nullable=False)
+    cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
+    cliente = db.relationship('Cliente')
 
     def __init__(self,quantidade, produto,detalhe,acao,valor,observacao,cliente_id):
         self.quantidade = quantidade
