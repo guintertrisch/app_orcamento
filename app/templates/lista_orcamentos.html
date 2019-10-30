@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Lista de Orçamentos</h3>
+
+<body>
+    <ul class="list-group">
+        {% for orc in list_orcamento %}
+            <li class="list-group-item active">{{orc.produto}}</li>
+        {% endfor %}
+</ul>
+<button type="submit"  class="btn btn-primary">Novo Orçamento</button>
+<a href="/"
+</body>
+{% endblock %}
