@@ -1,12 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField
+from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired
 
 
-class Orcamento(FlaskForm):
+class CadOrcamento(FlaskForm):
     cliente = StringField("cliente",validators=[DataRequired()])
-    contato = StringField("contato", validators=[DataRequired()])
-    local = StringField("local", validators=[DataRequired()])
     data = StringField("data", validators=[DataRequired()])
     descricao = TextAreaField("descricao", validators=[DataRequired()])
     quantidade = StringField("quantidade", validators=[DataRequired()])
@@ -16,5 +14,8 @@ class Orcamento(FlaskForm):
     valor = StringField("valor", validators=[DataRequired()])
     observacao = TextAreaField("observacao")
 
-    '''contato = PasswordField("password",validators=[DataRequired()])
-    remember_me = BooleanField("remember_me")'''
+
+class CadCliente(FlaskForm):
+    cliente = StringField("cliente", validators=[DataRequired()])
+    contato = StringField("contato", validators=[DataRequired()])
+    endereco = StringField("endereco", validators=[DataRequired()])
