@@ -1,7 +1,7 @@
 from app import app
-from flask import render_template
-from app.models.forms import Orcamento
-from app.models.tables import Cliente, db
+from flask import render_template, request
+from app.models.forms import CadOrcamento, CadCliente
+from app.models.tables import Cliente, db, Orcamento
 
 
 @app.route("/index")
@@ -11,15 +11,17 @@ def index():
 
 
 @app.route("/orcamento", methods=["GET","POST"])
-def cadastroOrcamento():
+def cadastroDeOrcamento():
 
-    form = Orcamento()
-
-    if form.validate_on_submit():
-        msg = None
-       #print(form.username.data)
-        #print(form.password.data)'''
-        orcamento = Cliente(form.cliente.data,
+    form = CadOrcamento()
+    listCliente = Cliente.query.all()
+    listOrcamentos = Orcamento.query.all()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            msg = None
+            #print(form.username.data)
+            #print(form.password.data)'''
+            orcamento = Cliente(form.cliente.data,
                             form.contato.data,
                             form.local.data,
                             form.data.data,
@@ -30,13 +32,17 @@ def cadastroOrcamento():
                             form.acao.data,
                             form.valor.data,
                             form.observacao.data)
-        db.session.add(orcamento)
-        db.session.commit()
-        msg = 'Orçamento Salvo com Sucesso!'
-        #return render_template('cadastro_orcamento.html',form=form,frase=msg)
-        return '<a href="/orcamento"> Voltar</a>'
+            db.session.add(orcamento)
+            db.session.commit()
+            msg = 'Orçamento Salvo com Sucesso!'
+            #return render_template('cad_orcamentos.html',form=form,frase=msg)
+            return '<a href="/orcamento"> Voltar</a>'
+    else:
+      return render_template('cad_orcamentos.html',form=form,cliente=listCliente)
+      #return render_template('lista_orcamentos.html',listOrc=listOrcamentos)
 
-    return render_template('cadastro_orcamento.html',form=form)
+
+
 
 
 @app.route("/teste/<info>")
@@ -57,3 +63,19 @@ def chamametodo():
 @app.route("/ok",methods =["GET","POST"])
 def chamou():
     return "<h>oka</h>"
+
+@app.route("/cliente", methods=["GET","POST"])
+def cadastroDeClientes():
+    formCli = CadCliente()
+
+    if request.method == 'POST':
+        msg = None
+        novoCliente = Cliente(formCli.cliente.data,
+                              formCli.contato.data,
+                              formCli.endereco.data)
+        db.session.add(novoCliente)
+        db.session.commit()
+        msg = 'Cliente Salvo com Sucesso!'
+        return '<a href="/cadastrocliente"> Voltar</a>'
+    else:
+        return render_template("cad_clientes.html", formCli=formCli)
