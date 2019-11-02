@@ -6,16 +6,12 @@ class Cliente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String)
     contato = db.Column(db.String)
-    local = db.Column(db.String)
-    data = db.Column(db.String)
-    descricao = db.Column(db.String)
+    endereco = db.Column(db.String)
 
-    def __init__(self,nome, contato,local,data,descricao):
+    def __init__(self, nome, contato, endereco):
         self.nome = nome
         self.contato = contato
-        self.local = local
-        self.data = data
-        self.descricao = descricao
+        self.endereco = endereco
 
     def __repr__(self):
         return "<Nome %r>" % self.nome
