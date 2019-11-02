@@ -17,21 +17,18 @@ def cadastroDeOrcamento():
     listCliente = Cliente.query.all()
     listOrcamentos = Orcamento.query.all()
     if request.method == 'POST':
+        print(request.form.get('inputCliente'))
         if form.validate_on_submit():
             msg = None
             #print(form.username.data)
             #print(form.password.data)'''
-            orcamento = Cliente(form.cliente.data,
-                            form.contato.data,
-                            form.local.data,
-                            form.data.data,
-                            form.descricao.data,
-                            form.quantidade.data,
-                            form.produto.data,
-                            form.detalhe.data,
-                            form.acao.data,
-                            form.valor.data,
-                            form.observacao.data)
+            orcamento = Orcamento(form.quantidade.data,
+                                  form.produto.data,
+                                  form.detalhe.data,
+                                  form.acao.data,
+                                  form.valor.data,
+                                  form.observacao.data,
+                                  "5")
             db.session.add(orcamento)
             db.session.commit()
             msg = 'Orçamento Salvo com Sucesso!'
@@ -76,6 +73,6 @@ def cadastroDeClientes():
         db.session.add(novoCliente)
         db.session.commit()
         msg = 'Cliente Salvo com Sucesso!'
-        return '<a href="/cadastrocliente"> Voltar</a>'
+        return '<a href="/cliente"> Voltar</a>'
     else:
         return render_template("cad_clientes.html", formCli=formCli)
