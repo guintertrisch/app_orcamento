@@ -7,13 +7,8 @@
 <form action="" method="POST">
     {{ form.csrf_token}}
     <div class="form-group">
-        <label>Cliente</label>
-        <select id="inputEstado" class="form-control">
-            <option selected>Escolher...</option>
-            {% for cli in cliente %}
-                <option>{{cli.nome}}</option>
-            {% endfor %}
-      </select>
+                {{form.cliente.label}}<br>
+                {{ form.cliente(class="form-control") }}
     </div>
     <div class="form-group">
         <label>Data</label>
