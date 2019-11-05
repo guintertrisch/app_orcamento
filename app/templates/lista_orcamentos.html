@@ -5,11 +5,11 @@
 
 <body>
     <ul class="list-group">
-        {% for orc in list_orcamento %}
-            <li class="list-group-item active">{{orc.produto}}</li>
+        {% for orc in listOrc %}
+            <li>{{orc.data}} - {{orc.produto}} - {{orc.quantidade}} - {{orc.detalhe}}</li>
         {% endfor %}
 </ul>
-<button type="submit"  class="btn btn-primary">Novo Orçamento</button>
-<a href="/"
+    <br>
+    <a class="btn btn-primary" href="/cadastroOrcamento" role="button">Novo Orçamento </a>
 </body>
 {% endblock %}
