@@ -20,6 +20,7 @@ class Cliente(db.Model):
 class Orcamento(db.Model):
     __tablename__ = "orcamentos"
     id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.String)
     quantidade = db.Column(db.String)
     produto = db.Column(db.String)
     detalhe = db.Column(db.String)
