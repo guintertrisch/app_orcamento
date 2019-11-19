@@ -1,8 +1,8 @@
-from app import db
+from app import db, ma
 
 
 class Cliente(db.Model):
-    __tablename__ = "clientes"
+    __tablename__ = 'clientes'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String)
     contato = db.Column(db.String)
@@ -15,7 +15,6 @@ class Cliente(db.Model):
 
     def __repr__(self):
         return "<Nome %r>" % self.nome
-
 
 class Orcamento(db.Model):
     __tablename__ = "orcamentos"
@@ -41,3 +40,33 @@ class Orcamento(db.Model):
 
     def __repr__(self):
         return "<Nome %r>" % self.nome
+
+class Produto(db.Model):
+    __tablename__ = "produtos"
+    id = db.Column(db.Integer, primary_key = True)
+    nome = db.Column(db.String)
+
+class Atendimento(db.Model):
+    __tablename__ = "atendimentos"
+    id = db.Column(db.Integer, primary_key = True)
+    nome = db.Column(db.String)
+    cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
+    cliente = db.relationship('Cliente')
+
+class Item(db.Model):
+    __tablename__ = "itens"
+    id = db.Column(db.Integer,primary_key = True)
+    detalhe = db.Column(db.String)
+    acao = db.Column(db.String)
+    valor = db.Column(db.Float)
+    cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
+    produto_id = db.Column(db.Integer, db.ForeignKey('produtos.id'), nullable=False)
+    atendimento_id = db.Column(db.Integer, db.ForeignKey('atendimentos.id'), nullable=False)
+    cliente = db.relationship('Cliente')
+    atendimento = db.relationship('Atendimento')
+    produto = db.relationship('Produto')
+
+
+class ClienteSchema(ma.ModelSchema):
+    class Meta:
+        model = Cliente

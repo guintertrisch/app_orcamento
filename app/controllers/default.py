@@ -6,7 +6,7 @@ from app.models.forms import CadOrcamento, CadCliente
 from app.models.tables import Cliente, db, Orcamento
 
 
-@app.route("/index")
+'''@app.route("/index")
 @app.route("/")
 def index():
     return render_template('lista_orcamentos.html')
@@ -54,4 +54,5 @@ def cadastroDeOrcamento():
         msg = 'Orçamento Salvo com Sucesso!'
         return redirect('/orcamento')
     else:
-        return render_template('cad_orcamentos.html',form=form,cliente=listCliente)
+        return render_template('cad_orcamentos.html',form=form,cliente=listCliente)'''
+
