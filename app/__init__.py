@@ -4,8 +4,10 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_login import LoginManager
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
@@ -18,5 +20,6 @@ lm = LoginManager()
 lm.init_app(app)
 ma = Marshmallow(app)
 
-from app.models import tables, forms
+from app.models import tables
 from app.controllers import cliente_controller
+
