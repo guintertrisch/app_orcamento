@@ -43,7 +43,7 @@ class Contato(db.Model):
     nome = db.Column(db.String)
     telefone = db.Column(db.String)
     email = db.Column(db.String)
-    principal = db.Column(db.String)
+    principal = db.Column(db.Boolean,default=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
 
     def __init__(self,nome, telefone,email,principal,cliente_id):
@@ -115,6 +115,6 @@ class EnderecoSchema(ma.ModelSchema):
 
 class ClienteSchema(ma.ModelSchema):
     contatos = ma.Nested(ContatoSchema, many=True)
-    enderecos = ma.Nested(EnderecoSchema, many=True)
+    enderecos = ma.Nested(EnderecoSchema,many=True,)
     class Meta:
         model = Cliente
