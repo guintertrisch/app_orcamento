@@ -42,11 +42,15 @@ class Contato(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String)
     telefone = db.Column(db.String)
+    email = db.Column(db.String)
+    principal = db.Column(db.String)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
 
-    def __init__(self,nome, telefone,cliente_id):
+    def __init__(self,nome, telefone,email,principal,cliente_id):
         self.nome = nome
         self.telefone = telefone
+        self.email = email
+        self.principal = principal
         self.cliente_id = cliente_id
 
 
@@ -101,10 +105,16 @@ class Item(db.Model):
     produto = db.relationship('Produto')
 
 
-class ClienteSchema(ma.ModelSchema):
-    class Meta:
-        model = Cliente
-
 class ContatoSchema(ma.ModelSchema):
     class Meta:
         model = Contato
+
+class EnderecoSchema(ma.ModelSchema):
+    class Meta:
+        model = Endereco
+
+class ClienteSchema(ma.ModelSchema):
+    contatos = ma.Nested(ContatoSchema, many=True)
+    enderecos = ma.Nested(EnderecoSchema, many=True)
+    class Meta:
+        model = Cliente
