@@ -7,7 +7,7 @@ class Cliente(db.Model):
     nome = db.Column(db.String)
     cpfcnpj = db.Column(db.String)
     contatos = db.relationship('Contato',backref='contato.nome')
-    enderecos = db.relationship('Endereco',backref='endereco')
+    enderecos = db.relationship('Endereco',backref='endereco',uselist=False)
 
     def __init__(self, nome,cpfcnpj=None):
         self.nome = nome
@@ -45,6 +45,7 @@ class Contato(db.Model):
     email = db.Column(db.String)
     principal = db.Column(db.Boolean,default=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
+    cliente = db.relationship('Cliente')
 
     def __init__(self,nome, telefone,email,principal,cliente_id):
         self.nome = nome
@@ -115,6 +116,6 @@ class EnderecoSchema(ma.ModelSchema):
 
 class ClienteSchema(ma.ModelSchema):
     contatos = ma.Nested(ContatoSchema, many=True)
-    enderecos = ma.Nested(EnderecoSchema,many=True,)
+    enderecos = ma.Nested(EnderecoSchema)
     class Meta:
         model = Cliente

@@ -9,28 +9,32 @@ def insert_cliente():
     cli = Cliente(request.json.get("nome"),request.json.get("cpfcnpj"))
     db.session.add(cli)
     db.session.commit()
-    id_cliente = Cliente.query.filter_by(nome=cli.nome).first()
 
     #adiciona contato
     for contatos in request.json.get("contatos"):
         co = Contato(contatos["nome"],contatos["telefone"],contatos["email"],contatos["principal"],
-                     id_cliente.id)
+                     cli.id)
         db.session.add(co)
         db.session.commit()
 
     #adiciona endereco
-    for enderecos in request.json.get("enderecos"):
-        end = Endereco(enderecos["rua"],enderecos["bairro"],enderecos["cidade"],
-                       enderecos["numero"],enderecos["complemento"],enderecos["estado"],
-                       id_cliente.id)
-        db.session.add(end)
-        db.session.commit()
+    req_end = request.json.get("enderecos")
+    end = Endereco(req_end["rua"], req_end["bairro"], req_end["cidade"],req_end["numero"],
+                   req_end["complemento"],req_end["estado"],cli.id)
+    db.session.add(end)
+    db.session.commit()
 
-    return {"status":200}
+    return {"status":201,"MSG:":"Cliente add com sucesso!","id":cli.id}
 
-
+@app.route("/clientes", methods=["DELETE"])
 def delete_cliente():
-    pass
+    id = request.json.get("id")
+    Cliente.query.filter_by(id=id).delete()
+    Contato.query.filter_by(cliente_id=id).delete()
+    Endereco.query.filter_by(cliente_id=id).delete()
+    db.session.commit()
+
+    return {"status":200,"MSG:":"Cliente deletado com sucesso!"}
 
 
 
