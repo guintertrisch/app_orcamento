@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, request, jsonify
 from app.models.tables import Cliente, db, Orcamento, ClienteSchema,Contato,ContatoSchema,Endereco
 
+
 @app.route("/clientes", methods=["POST"])
 def insert_cliente():
 
@@ -24,18 +25,18 @@ def insert_cliente():
     db.session.add(end)
     db.session.commit()
 
-    return {"status":201,"MSG:":"Cliente add com sucesso!","id":cli.id}
+    return {"status":201,"MSG":"Cliente add com sucesso!","id":cli.id}
 
-@app.route("/clientes", methods=["DELETE"])
-def delete_cliente():
-    id = request.json.get("id")
+
+@app.route("/clientes/<id>", methods=["DELETE"])
+def delete_cliente(id):
+
     Cliente.query.filter_by(id=id).delete()
     Contato.query.filter_by(cliente_id=id).delete()
     Endereco.query.filter_by(cliente_id=id).delete()
     db.session.commit()
 
-    return {"status":200,"MSG:":"Cliente deletado com sucesso!"}
-
+    return {"status":200,"MSG":"Cliente deletado com sucesso!","id":id}
 
 
 @app.route("/clientes", methods=["GET"])
@@ -45,6 +46,16 @@ def list_cliente():
         cliente = Cliente.query.all()
         return cli.dumps(cliente),200
 
+
 @app.route("/clientes", methods=["PUT"])
 def udpdate_cliente():
-    cli  = Cliente.query.filter()
+    id = request.json.get("id")
+    cli = Cliente.query.filter_by(id=id)
+
+    #pega dados novos cliente
+    cli_up = Cliente(request.json.get("nome"),request.json.get("cpfcnpj"))
+    cli = cli_up
+    db.session.add(cli)
+    db.session.commit()
+
+    return {"status":200,"MSG":"Cliente atualizado com sucesso!","id":id}
