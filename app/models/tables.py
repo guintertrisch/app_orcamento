@@ -1,3 +1,5 @@
+from flask_marshmallow import fields
+
 from app import db, ma
 
 
@@ -6,7 +8,7 @@ class Cliente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String)
     cpfcnpj = db.Column(db.String)
-    contatos = db.relationship('Contato',backref='contato.nome')
+    contatos = db.relationship('Contato',backref='contato')
     enderecos = db.relationship('Endereco',backref='endereco',uselist=False)
 
     def __init__(self, nome,cpfcnpj=None):
@@ -27,6 +29,7 @@ class Endereco(db.Model):
     estado = db.Column(db.String)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
     cliente = db.relationship('Cliente')
+    #cliente = db.relationship("Cliente", backref=("enderecos"))
 
     def __init__(self, rua, bairro, cidade, numero, complemento, estado, cliente_id):
         self.rua = rua
@@ -46,6 +49,7 @@ class Contato(db.Model):
     principal = db.Column(db.Boolean,default=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
     cliente = db.relationship('Cliente')
+    #cliente = db.relationship("Cliente", backref=("contatos"))
 
     def __init__(self,nome, telefone,email,principal,cliente_id):
         self.nome = nome
@@ -115,7 +119,9 @@ class EnderecoSchema(ma.ModelSchema):
         model = Endereco
 
 class ClienteSchema(ma.ModelSchema):
-    contatos = ma.Nested(ContatoSchema, many=True)
+    contatos = ma.Nested(ContatoSchema,many=True)
+    #contatos = fields.Nested(ContatoSchema,many=True, only=["principal"==True])
     enderecos = ma.Nested(EnderecoSchema)
+
     class Meta:
         model = Cliente
