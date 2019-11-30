@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, jsonify
-from app.views import clientes
+from app.controllers import clientes
 from app.models.tables import Cliente, db, Orcamento, ClienteSchema,Contato,Endereco
 
 

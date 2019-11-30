@@ -1,5 +1,3 @@
-from flask_marshmallow import fields
-
 from app import db, ma
 
 
@@ -84,7 +82,7 @@ class Orcamento(db.Model):
     def __repr__(self):
         return "<Nome %r>" % self.nome
 
-class Produto(db.Model):
+'''class Produto(db.Model):
     __tablename__ = "produtos"
     id = db.Column(db.Integer, primary_key = True)
     nome = db.Column(db.String)
@@ -107,7 +105,7 @@ class Item(db.Model):
     atendimento_id = db.Column(db.Integer, db.ForeignKey('atendimentos.id'), nullable=False)
     cliente = db.relationship('Cliente')
     atendimento = db.relationship('Atendimento')
-    produto = db.relationship('Produto')
+    produto = db.relationship('Produto')'''
 
 
 class ContatoSchema(ma.ModelSchema):
@@ -120,7 +118,6 @@ class EnderecoSchema(ma.ModelSchema):
 
 class ClienteSchema(ma.ModelSchema):
     contatos = ma.Nested(ContatoSchema,many=True)
-    #contatos = fields.Nested(ContatoSchema,many=True, only=["principal"==True])
     enderecos = ma.Nested(EnderecoSchema)
 
     class Meta:
