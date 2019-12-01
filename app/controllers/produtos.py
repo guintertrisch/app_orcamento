@@ -47,7 +47,7 @@ def list_produto():
         return jsonify({'MSG': 'Nao foi possivel listar produtos'}),500
 
 
-def pesquisa_produto(nome):
+def pesquisar_produto(nome):
     try:
         produto = ProdutoSchema(many=True)
         prod = Produto.query.filter(Produto.nome.ilike('%'+nome+'%'))

@@ -19,5 +19,5 @@ def get_produto():
     return produtos.list_produto()
 
 @app.route("/produtos/<nome>",methods=["GET"])
-def pesquisa_produto(nome):
+def pesquisar_produto(nome):
     return produtos.pesquisa_produto(nome)
