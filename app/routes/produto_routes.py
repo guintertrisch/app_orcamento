@@ -20,4 +20,4 @@ def get_produto():
 
 @app.route("/produtos/<nome>",methods=["GET"])
 def pesquisar_produto(nome):
-    return produtos.pesquisa_produto(nome)
+    return produtos.pesquisar_produto(nome)
