@@ -12,15 +12,16 @@ def insert_produto():
         return jsonify({'MSG': 'nao foi possivel salvar produto', 'dado': {}}), 500
 
 
-def update_produto(id):
-    produto = Produto.query.get(id)
+def update_produto():
+    id_request = request.json.get("id")
+    produto = Produto.query.get(id_request)
     if not produto:
-        return jsonify({'MSG': 'Produto nao existe', 'dado': id}), 404
+        return jsonify({'MSG': 'Produto nao existe', 'dado': id_request}), 404
     else:
         try:
             produto.nome = request.json.get("nome")
             db.session.commit()
-            return jsonify({'MSG': 'Produto atualizado com sucesso', 'dado': id}), 201
+            return jsonify({'MSG': 'Produto atualizado com sucesso', 'dado': id_request}), 201
         except:
             return jsonify({'MSG': 'nao foi possivel atualizar produto', 'dado': {}}), 500
 
