@@ -70,7 +70,7 @@ def update_cliente():
         end.bairro = req_end["bairro"]
         end.cidade = req_end["cidade"]
         end.numero = req_end["numero"]
-        end.complemente = req_end["complemento"]
+        end.complemento = req_end["complemento"]
         end.estado = req_end["estado"]
         db.session.commit()
 
@@ -85,3 +85,11 @@ def update_cliente():
             db.session.commit()
 
         return jsonify({'MSG': 'Cliente atualizado com sucesso', 'dado': id_request}), 201
+
+def pesquisar_cliente(nome):
+    try:
+        cliente = ClienteSchema(many=True)
+        cli = Cliente.query.filter(Cliente.nome.ilike('%'+nome+'%'))
+        return cliente.dumps(cli)
+    except:
+        return jsonify({'MSG': 'Nao foi possivel encontrar cliente'}), 404

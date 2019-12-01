@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models.produto import db,Produto
+from app.models.produto import db, Produto, ProdutoSchema
 
 
 def insert_produto():
@@ -36,3 +36,21 @@ def delete_produto(id):
             return jsonify({'MSG':'Produto deletado com sucesso!','dado':id}), 200
         except:
             return jsonify({'MSG': 'nao foi possivel deletar', 'dado': {}}), 500
+
+
+def list_produto():
+    try:
+        prod = ProdutoSchema(many=True)
+        produto = Produto.query.all()
+        return prod.dumps(produto), 200
+    except:
+        return jsonify({'MSG': 'Nao foi possivel listar produtos'}),500
+
+
+def pesquisa_produto(nome):
+    try:
+        produto = ProdutoSchema(many=True)
+        prod = Produto.query.filter(Produto.nome.ilike('%'+nome+'%'))
+        return produto.dumps(prod)
+    except:
+        return jsonify({'MSG': 'Nao foi possivel encontrar produto'}), 404

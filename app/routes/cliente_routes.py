@@ -22,3 +22,7 @@ def get_cliente():
 @app.route("/clientes", methods=["PUT"])
 def put_cliente():
     return clientes.update_cliente()
+
+@app.route("/clientes/<nome>", methods=["GET"])
+def pesquisar_cliente(nome):
+    return clientes.pesquisar_cliente(nome)

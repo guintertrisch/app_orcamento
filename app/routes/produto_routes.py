@@ -13,3 +13,11 @@ def put_produto(id):
 @app.route("/produtos/<id>", methods=["DELETE"])
 def delete_produto(id):
     return produtos.delete_produto(id)
+
+@app.route("/produtos",methods=["GET"])
+def get_produto():
+    return produtos.list_produto()
+
+@app.route("/produtos/<nome>",methods=["GET"])
+def pesquisa_produto(nome):
+    return produtos.pesquisa_produto(nome)
