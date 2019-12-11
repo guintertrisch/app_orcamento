@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, request, jsonify
 from app.controllers import clientes
-from app.models.tables import Cliente, db, Orcamento, ClienteSchema,Contato,Endereco
+from app.models.tables import Cliente, db,ClienteSchema,Contato,Endereco
 
 
 @app.route("/clientes", methods=["POST"])

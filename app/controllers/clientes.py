@@ -45,9 +45,8 @@ def delete_cliente(id):
 def list_cliente():
     try:
         cli = ClienteSchema(many=True)
-        if request.method == 'GET':
-            cliente = Cliente.query.all()
-            return cli.dumps(cliente), 200
+        cliente = Cliente.query.all()
+        return cli.dumps(cliente), 200
     except:
         return jsonify({'MSG': 'nao foi possivel listar', 'dado': {}}), 500
 
@@ -93,3 +92,13 @@ def pesquisar_cliente(nome):
         return cliente.dumps(cli)
     except:
         return jsonify({'MSG': 'Nao foi possivel encontrar cliente'}), 404
+
+
+def list_cliente_principal():
+    try:
+        cli = ClienteSchema(many=True)
+        cliente = db.session.query(Cliente).join(Contato,Endereco).filter(Contato.principal==False).all()
+        print(cliente)
+        return cli.dumps(cliente), 200
+    except:
+        return jsonify({'MSG': 'nao foi possivel listar', 'dado': {}}), 500

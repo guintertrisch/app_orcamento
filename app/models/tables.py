@@ -7,6 +7,9 @@ class Cliente(db.Model):
     nome = db.Column(db.String)
     cpfcnpj = db.Column(db.String)
     contatos = db.relationship('Contato',backref='contato')
+    '''contatos = db.relationship("Contato",
+                                    primaryjoin="and_(Cliente.id==Contato.cliente_id, "
+                                                "Contato.principal==True)")'''
     enderecos = db.relationship('Endereco',backref='endereco',uselist=False)
 
     def __init__(self, nome,cpfcnpj=None):
@@ -57,57 +60,6 @@ class Contato(db.Model):
         self.cliente_id = cliente_id
 
 
-class Orcamento(db.Model):
-    __tablename__ = "orcamentos"
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String)
-    quantidade = db.Column(db.String)
-    produto = db.Column(db.String)
-    detalhe = db.Column(db.String)
-    acao = db.Column(db.String)
-    valor = db.Column(db.String)
-    observacao = db.Column(db.String, nullable=False)
-    cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
-    cliente = db.relationship('Cliente')
-
-    def __init__(self,quantidade, produto,detalhe,acao,valor,observacao,cliente_id):
-        self.quantidade = quantidade
-        self.produto = produto
-        self.detalhe = detalhe
-        self.acao = acao
-        self.valor = valor
-        self.observacao = observacao
-        self.cliente_id = cliente_id
-
-    def __repr__(self):
-        return "<Nome %r>" % self.nome
-
-'''class Produto(db.Model):
-    __tablename__ = "produtos"
-    id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String)
-
-class Atendimento(db.Model):
-    __tablename__ = "atendimentos"
-    id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String)
-    cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
-    cliente = db.relationship('Cliente')
-
-class Item(db.Model):
-    __tablename__ = "itens"
-    id = db.Column(db.Integer,primary_key=True)
-    detalhe = db.Column(db.String)
-    acao = db.Column(db.String)
-    valor = db.Column(db.Float)
-    cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
-    produto_id = db.Column(db.Integer, db.ForeignKey('produtos.id'), nullable=False)
-    atendimento_id = db.Column(db.Integer, db.ForeignKey('atendimentos.id'), nullable=False)
-    cliente = db.relationship('Cliente')
-    atendimento = db.relationship('Atendimento')
-    produto = db.relationship('Produto')'''
-
-
 class ContatoSchema(ma.ModelSchema):
     class Meta:
         model = Contato
@@ -117,7 +69,7 @@ class EnderecoSchema(ma.ModelSchema):
         model = Endereco
 
 class ClienteSchema(ma.ModelSchema):
-    contatos = ma.Nested(ContatoSchema,many=True)
+    contatos = ma.Nested(ContatoSchema, many=True)
     enderecos = ma.Nested(EnderecoSchema)
 
     class Meta:
