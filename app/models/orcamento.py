@@ -9,15 +9,15 @@ from marshmallow import fields
 class Orcamento(db.Model):
     __tablename__ = 'orcamentos'
     id = db.Column(db.Integer, primary_key=True)
-    data_atual = db.Column(db.DateTime, nullable=False)
-    data_agendamento = db.Column(db.DateTime, nullable=False)
-    data_conclusao = db.Column(db.DateTime)
-    data_cancelamento = db.Column(db.DateTime)
-    descricao = db.Column(db.String(200),nullable=False)
+    data_atual = db.Column(db.Date, nullable=False)
+    data_agendamento = db.Column(db.Date, nullable=False)
+    data_conclusao = db.Column(db.Date)
+    data_cancelamento = db.Column(db.Date)
+    descricao = db.Column(db.String(200), nullable=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
     orcamentoDetalhe = db.relationship('OrcamentoDetalhe',backref='OrcamentoDetalhe')
-    cliente = db.relationship('Cliente',backref='orcamento')
-    observacao = db.Column(db.String(4000),nullable=False)
+    cliente = db.relationship('Cliente', backref='orcamento')
+    observacao = db.Column(db.String(4000), nullable=True)
 
 
     def __init__(self,data_agendamento, descricao, cliente_id, observacao = None):

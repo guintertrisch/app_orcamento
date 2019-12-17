@@ -2,16 +2,17 @@ from flask import request, jsonify
 from app.models.orcamento import Orcamento,OrcamentoSchema
 from app.models.orcamento_detalhe import OrcamentoDetalhe
 from app.models.tables import Cliente, ClienteSchema
+from datetime import datetime
 from app import db
 
 def insert_orcamento():
     id_request = request.json.get("cliente_id")
+    data_agendamento = datetime.strptime(request.json.get("data_agendamento"), '%d/%m/%Y').date()
     cli = Cliente.query.get(id_request)
     if not cli:
         return jsonify({'MSG': 'Cliente nao existe', 'dado': id_request}), 404
     else:
-        #adiciona orcamento
-        orc = Orcamento('09/12/2019',"Primeiro Orcamento do APP",id_request,"agora vai")
+        orc = Orcamento(data_agendamento, request.json.get("descricao"), id_request)
         db.session.add(orc)
         db.session.commit()
 
@@ -24,12 +25,13 @@ def insert_orcamento():
         return jsonify({'MSG': 'Orcamento salvo com sucesso!', 'dado': orc.id}), 201
 
 def list_orcamento():
-    orca = OrcamentoSchema(many=True, only=("descricao",
-                                           "data_conclusao",
-                                           "data_agendamento",
-                                           "data_cancelamento",
-                                           "cliente.nome",
-                                           "cliente.id")
+    orca = OrcamentoSchema(many=True, only=("id",
+                                            "descricao",
+                                            "data_conclusao",
+                                            "data_agendamento",
+                                            "data_cancelamento",
+                                            "cliente.nome",
+                                            "cliente.id")
                            )
     orc = Orcamento.query.all()
     return orca.dumps(orc), 200
