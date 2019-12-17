@@ -1,9 +1,12 @@
 from flask import request, jsonify
-from app.models.orcamento import Orcamento,OrcamentoSchema
+
+from app.models import orcamento, orcamento_detalhe
+from app.models.orcamento import Orcamento, OrcamentoSchema
 from app.models.orcamento_detalhe import OrcamentoDetalhe
 from app.models.tables import Cliente, ClienteSchema
 from datetime import datetime
 from app import db
+
 
 def insert_orcamento():
     id_request = request.json.get("cliente_id")
@@ -16,13 +19,14 @@ def insert_orcamento():
         db.session.add(orc)
         db.session.commit()
 
-        #adiciona itens do orcamento
+        # adiciona itens do orcamento
         for itens in request.json.get("itens"):
             orc_itens = OrcamentoDetalhe(itens["quantidade"], itens["produto_servico"], itens["acao"], itens["valor"],
-                         orc.id)
+                                         orc.id)
             db.session.add(orc_itens)
             db.session.commit()
         return jsonify({'MSG': 'Orcamento salvo com sucesso!', 'dado': orc.id}), 201
+
 
 def list_orcamento():
     orca = OrcamentoSchema(many=True, only=("id",
@@ -36,7 +40,22 @@ def list_orcamento():
     orc = Orcamento.query.all()
     return orca.dumps(orc), 200
 
+
 def pesquisa_orcamento_cliente(id):
     orca = OrcamentoSchema(many=True)
     orc = Orcamento.query.filter_by(cliente_id=id).all()
     return orca.dumps(orc), 200
+
+
+def delete_orcamento(id):
+    orc = Orcamento.query.get(id)
+    if not orc:
+        return jsonify({'MSG': 'Orcamento nao existe', 'dado': id}), 404
+    else:
+        try:
+            OrcamentoDetalhe.query.filter_by(orcamento_id=id).delete()
+            Orcamento.query.filter_by(id=id).delete()
+            db.session.commit()
+            return jsonify({'MSG': 'Orcamento deletado com sucesso!', 'dado': id}), 200
+        except:
+            return jsonify({'MSG': 'nao foi possivel deletar', 'dado': {}}), 500
