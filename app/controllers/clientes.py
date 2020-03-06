@@ -22,9 +22,9 @@ def insert_cliente():
                        req_end["complemento"], req_end["estado"], cli.id)
         db.session.add(end)
         db.session.commit()
-        return jsonify({'MSG':'Cliente salvo com sucesso!','dado':cli.id}), 201
+        return jsonify({'MSG': 'Cliente salvo com sucesso!', 'dado': cli.id}), 201
     except:
-        return jsonify({'MSG':'nao foi possivel salvar','dado':{}}), 500
+        return jsonify({'MSG': 'nao foi possivel salvar', 'dado': {}}), 500
 
 
 def delete_cliente(id):
@@ -37,7 +37,7 @@ def delete_cliente(id):
             Endereco.query.filter_by(cliente_id=id).delete()
             Cliente.query.filter_by(id=id).delete()
             db.session.commit()
-            return jsonify({'MSG':'Cliente deletado com sucesso!','dado':id}), 200
+            return jsonify({'MSG': 'Cliente deletado com sucesso!', 'dado': id}), 200
         except:
             return jsonify({'MSG': 'nao foi possivel deletar', 'dado': {}}), 500
 
@@ -57,14 +57,14 @@ def update_cliente():
     if not cli:
         return jsonify({'MSG': 'Cliente nao existe', 'dado': id_request}), 404
     else:
-        #atualiza cliente
+        # atualiza cliente
         cli.nome = request.json.get("nome")
         cli.cpfcnpj = request.json.get("cpfcnpj")
         db.session.commit()
 
-        #atualiza endereco
+        # atualiza endereco
         req_end = request.json.get("enderecos")
-        end = Endereco.query.filter_by(cliente_id = id_request).one()
+        end = Endereco.query.filter_by(cliente_id=id_request).one()
         end.rua = req_end["rua"]
         end.bairro = req_end["bairro"]
         end.cidade = req_end["cidade"]
@@ -73,7 +73,7 @@ def update_cliente():
         end.estado = req_end["estado"]
         db.session.commit()
 
-        #atualiza contatos
+        # atualiza contatos
         co = Contato.query.filter_by(cliente_id=id_request).delete()
         db.session.commit()
         # adiciona contato
@@ -85,10 +85,11 @@ def update_cliente():
 
         return jsonify({'MSG': 'Cliente atualizado com sucesso', 'dado': id_request}), 201
 
+
 def pesquisar_cliente(nome):
     try:
         cliente = ClienteSchema(many=True)
-        cli = Cliente.query.filter(Cliente.nome.ilike('%'+nome+'%'))
+        cli = Cliente.query.filter(Cliente.nome.ilike('%' + nome + '%'))
         return cliente.dumps(cli)
     except:
         return jsonify({'MSG': 'Nao foi possivel encontrar cliente'}), 404
@@ -97,7 +98,7 @@ def pesquisar_cliente(nome):
 def list_cliente_principal():
     try:
         cli = ClienteSchema(many=True)
-        cliente = db.session.query(Cliente).join(Contato,Endereco).filter(Contato.principal==False).all()
+        cliente = db.session.query(Cliente).join(Contato, Endereco).filter(Contato.principal == False).all()
         print(cliente)
         return cli.dumps(cliente), 200
     except:

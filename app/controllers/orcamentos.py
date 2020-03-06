@@ -15,7 +15,7 @@ def insert_orcamento():
     if not cli:
         return jsonify({'MSG': 'Cliente nao existe', 'dado': id_request}), 404
     else:
-        orc = Orcamento(data_agendamento, request.json.get("descricao"), id_request)
+        orc = Orcamento(data_agendamento, request.json.get("descricao"), id_request, request.json.get("observacao"))
         db.session.add(orc)
         db.session.commit()
 
