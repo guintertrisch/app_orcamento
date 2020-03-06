@@ -20,6 +20,6 @@ lm = LoginManager()
 lm.init_app(app)
 ma = Marshmallow(app)
 
-from app.models import tables
-from app.controllers import cliente_controller
-
+from app.models import tables, produto, orcamento, orcamento_detalhe
+from app.controllers import clientes
+from app.routes import cliente_routes,produto_routes,orcamento_routes
