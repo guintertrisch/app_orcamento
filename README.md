@@ -20,7 +20,7 @@ Funcionalidades:
  
   - python -m venv venv
   
-  - cmd: venv\Scritp\activate
+  - cmd: venv\Scripts\activate
   
   Instação das dependencias:
   
