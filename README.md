@@ -1,4 +1,4 @@
-# app_orcamento
+# api_orcamento
 
 Funcionalidades:
 
@@ -10,7 +10,7 @@ Funcionalidades:
   
   - Geração de PDF
   
- # Setup APP
+ # Setup API
  
  Clone:
   
@@ -22,10 +22,10 @@ Funcionalidades:
   
   - cmd: venv\Scripts\activate
   
-  Instação das dependencias:
+  Instalação das dependencias:
   
     - cmd: pip install -r requirements.txt
     
-# Subir APP
+# Subir API
 
   - cmd: pyhton run.py runserver
