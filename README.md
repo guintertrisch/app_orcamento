@@ -28,4 +28,4 @@ Funcionalidades:
     
 # Subir API
 
-  - cmd: pyhton run.py runserver
+  - cmd: python run.py runserver
