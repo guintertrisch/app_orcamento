@@ -1,0 +1,95 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<head>
+
+
+</head>
+<body>
+
+<form action="" class="form-horizontal" method="POST">
+    {{ form.csrf_token }}
+    <fieldset>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Cadastro de Cliente</div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <!--
+                    <div class="form-group">
+                    <div class="col-md-4 control-label">
+                        <img id="logo" src="http://blogdoporao.com.br/wp-content/uploads/2016/12/Faculdade-pitagoras.png"/>
+                    </div>
+                    <div class="col-md-4 control-label">
+                        <h1>Cadastro de Cliente</h1>
+
+                    </div>
+                    </div>
+                        -->
+                    <div class="col-md-11 control-label">
+                        <p class="help-block">
+                            <h11>*</h11>
+                            Campo Obrigatório
+                        </p>
+                    </div>
+                </div>
+                {% block content %}
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Nome">Nome
+                        <h11>*</h11>
+                    </label>
+                    <div class="col-md-8">
+                        {{ form.nome (class="form-control input-md")}}
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Nome">Telefone
+                        <h11>*</h11>
+                    </label>
+                    <div class="col-md-2">
+                        {{ form.telefone (placeholder="51 XXXXXXX", class="form-control input-md")}}
+                    </div>
+
+                    <label class="col-md-1 control-label" for="Nome">Data Atendimento
+                        <h11>*</h11>
+                    </label>
+                    <div class="col-md-2">
+                        {{ form.data_atendimento (placeholder="DD/MM/AAAA", class="form-control input-md")}}
+                    </div>
+
+                    <!-- Multiple Radios (inline) -->
+
+                </div>
+
+                <!-- Prepended text-->
+
+                <!-- Prepended text-->
+
+
+                <!-- Search input-->
+
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Cadastrar"></label>
+                    <div class="col-md-8">
+                        <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar</button>
+                        <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </fieldset>
+</form>
+
+</body>
+{% endblock %}
+</html>

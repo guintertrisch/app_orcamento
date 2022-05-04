@@ -1,7 +1,8 @@
+from flask import render_template
+
 from app import app
-from flask import render_template, request, jsonify
 from app.controllers import clientes
-from app.models.tables import Cliente, db,ClienteSchema,Contato,Endereco
+from app.forms.forms import CadastroForm
 
 
 @app.route("/clientes", methods=["POST"])
@@ -23,6 +24,20 @@ def get_cliente():
 def put_cliente():
     return clientes.update_cliente()
 
+
 @app.route("/clientes/<nome>", methods=["GET"])
 def pesquisar_cliente(nome):
     return clientes.pesquisar_cliente(nome)
+
+
+@app.route("/", methods=["POST"])
+def cadastar():
+    form = CadastroForm()
+    clientes.insert_cliente(form)
+    return render_template('home1.html', form=form)
+
+
+@app.route("/", methods=["GET"])
+def home_page():
+    form = CadastroForm()
+    return render_template('home1.html', form=form)

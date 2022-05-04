@@ -3,7 +3,7 @@ from flask import request, jsonify
 from app.models import orcamento, orcamento_detalhe
 from app.models.orcamento import Orcamento, OrcamentoSchema
 from app.models.orcamento_detalhe import OrcamentoDetalhe
-from app.models.tables import Cliente, ClienteSchema
+from app.models.cliente import Cliente, ClienteSchema
 from datetime import datetime
 from app import db
 
