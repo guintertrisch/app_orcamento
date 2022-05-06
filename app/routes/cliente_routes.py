@@ -1,8 +1,8 @@
 from flask import render_template
 
 from app import app
-from app.controllers import clientes
-from app.forms.forms import CadastroForm
+from app.controllers import clientes, atendimentos
+from app.forms.forms import CadastroForm, PesquisaForm
 
 
 @app.route("/clientes", methods=["POST"])
@@ -17,7 +17,9 @@ def delete_cliente(id):
 
 @app.route("/clientes", methods=["GET"])
 def get_cliente():
-    return clientes.list_cliente()
+    form = PesquisaForm()
+    return render_template('consulta_atendimento.html', form=form)
+    # return clientes.list_cliente()
 
 
 @app.route("/clientes", methods=["PUT"])
@@ -41,3 +43,22 @@ def cadastar():
 def home_page():
     form = CadastroForm()
     return render_template('home1.html', form=form)
+
+
+@app.route("/atendimentos", methods=["GET"])
+def goto_atendimentos():
+    form = PesquisaForm()
+    return render_template('consulta_atendimento.html', form=form)
+
+
+@app.route("/atendimentos/consultas", methods=["GET"])
+def get_atendimentos_seis_meses():
+    form = PesquisaForm()
+    return render_template('consulta_atendimento.html', cliente=atendimentos.retorna_atendimentos(), form=form)
+
+
+@app.route("/atendimentos/consultas", methods=["GET"])
+def get_atendimentos_dose_meses():
+    form = PesquisaForm()
+    return render_template('consulta_atendimento.html', cliente=atendimentos.retorna_atendimentos_dose_meses(),
+                           form=form)

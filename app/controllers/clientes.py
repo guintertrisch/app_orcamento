@@ -1,5 +1,5 @@
 import datetime
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import request, jsonify
 
@@ -32,12 +32,11 @@ def delete_cliente(id):
 
 
 def list_cliente():
-    try:
-        cli = ClienteSchema(many=True)
-        cliente = Cliente.query.all()
-        return cli.dumps(cliente), 200
-    except:
-        return jsonify({'MSG': 'nao foi possivel listar', 'dado': {}}), 500
+    cli = ClienteSchema(many=True)
+    periodo = datetime.now() - timedelta(days=5)
+    cliente = Cliente.query.filter(Cliente.data_atendimento.between(periodo, datetime.now().date()))
+
+    return cli.dumps(cliente)
 
 
 def update_cliente():
