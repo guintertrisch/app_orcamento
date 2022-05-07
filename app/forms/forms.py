@@ -10,6 +10,5 @@ class CadastroForm(Form):
 
 class PesquisaForm(Form):
     nome = StringField()
-    data_atendimento = StringField()
     data_inicio = StringField()
     data_fim = StringField()

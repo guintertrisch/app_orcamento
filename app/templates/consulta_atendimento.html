@@ -9,8 +9,8 @@
 
 </head>
 <body>
-
-<form action="" class="form-horizontal" method="POST">
+{% block content %}
+<form action="/atendimentos/consultas/filtro" class="form-horizontal" method="POST">
     {{ form.csrf_token }}
     <fieldset>
         <div class="panel panel-primary">
@@ -36,7 +36,7 @@
                         </p>
                     </div>
                 </div>
-                {% block content %}
+
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="Nome">Nome
@@ -58,7 +58,7 @@
                         <h11>*</h11>
                     </label>
                     <div class="col-md-2">
-                        {{ form.data_atendimento (placeholder="DD/MM/AAAA", class="form-control input-md")}}
+                        {{ form.data_fim (placeholder="DD/MM/AAAA", class="form-control input-md")}}
                     </div>
 
                     <!-- Multiple Radios (inline) -->
@@ -74,13 +74,15 @@
 
                 <!-- Button (Double) -->
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="Cadastrar"></label>
+                    <label class="col-md-2 control-label" for="Consultar"></label>
                     <div class="col-md-8">
                         <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Consultar</button>
                         <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
-                        <a href="{{ url_for('get_atendimentos_seis_meses') }}" class="btn btn-success">Últimos 6
+                        <a href="{{ url_for('consultar_periodo',periodo='seis_meses') }}"
+                           class="btn btn-success">Últimos 6
                             Meses</a>
-                        <a href="{{ url_for('get_atendimentos_dose_meses') }}" class="btn btn-success">Últimos 12
+                        <a href="{{ url_for('consultar_periodo',periodo='doze_meses') }}"
+                           class="btn btn-success">Últimos 12
                             Meses</a>
                         </button>
                     </div>
