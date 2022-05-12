@@ -3,19 +3,21 @@ from datetime import datetime, timedelta
 
 from flask import request, jsonify
 
-from app.models.cliente import Cliente, db, ClienteSchema
+from app.models.cliente import Cliente, db, ClienteSchema, Atendimentos
 
 
 def insert_cliente(form):
     # adiciona cliente
-    cli = Cliente(form.nome.data, form.telefone.data,
-                  datetime.strptime(form.data_atendimento.data, '%d/%m/%Y').date())
-    try:
-        db.session.add(cli)
-        db.session.commit()
-        return jsonify({'MSG': 'Cliente salvo com sucesso!', 'dado': cli.id}), 201
-    except:
-        return jsonify({'MSG': 'nao foi possivel salvar', 'dado': {}}), 500
+    cli = Cliente(nome=form.nome.data, telefone=form.telefone.data)
+    db.session.add(cli)
+    db.session.commit()
+
+    # adiciona atendimento
+    atendimento = Atendimentos(data_atendimento=datetime.strptime(form.data_atendimento.data, '%d/%m/%Y').date(),
+                               descricao=form.descricao.data, cliente_id=cli.id)
+    db.session.add(atendimento)
+    db.session.commit()
+    return jsonify({'MSG': 'Cliente salvo com sucesso!', 'dado': cli.id}), 201
 
 
 def delete_cliente(id):

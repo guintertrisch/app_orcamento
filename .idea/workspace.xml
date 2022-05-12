@@ -7,10 +7,12 @@
     <list default="true" id="fcb2662c-4f68-49af-9599-7fe54cf91ef5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/atendimentos.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/atendimentos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/clientes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/forms/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/cliente_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/cliente_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/consulta_atendimento.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/consulta_atendimento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/home1.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/7eb156117f18_.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/storage.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +34,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -207,6 +214,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.run" />
+        <item itemvalue="Python.teste" />
+        <item itemvalue="Python.teste" />
         <item itemvalue="Python.run" />
         <item itemvalue="Python.teste" />
       </list>

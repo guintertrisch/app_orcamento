@@ -14,7 +14,7 @@
     {{ form.csrf_token }}
     <fieldset>
         <div class="panel panel-primary">
-            <div class="panel-heading">Cadastro de Atendimento do Cliente</div>
+            <div class="panel-heading">Cadastro de Novos Clientes e Atendimentos</div>
 
             <div class="panel-body">
                 <div class="form-group">
@@ -42,7 +42,7 @@
                     <label class="col-md-2 control-label" for="Nome">Nome
                         <h11>*</h11>
                     </label>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         {{ form.nome (class="form-control input-md")}}
                     </div>
                 </div>
@@ -56,25 +56,21 @@
                         {{ form.telefone (placeholder="51 XXXXXXX", class="form-control input-md")}}
                     </div>
 
-                    <label class="col-md-2 control-label" for="Nome">Data Atendimento
+                    <label class="col-md-1 control-label" for="Nome">Data Atendimento
                         <h11>*</h11>
                     </label>
                     <div class="col-md-2">
                         {{ form.data_atendimento (placeholder="DD/MM/AAAA", class="form-control input-md")}}
                     </div>
-
-                    <!-- Multiple Radios (inline) -->
-
+                    <div class="form-group">
+                        <label class="col-md-1 control-label" for="Nome">Descrição
+                            <h11>*</h11>
+                        </label>
+                        <div class="col-md-3">
+                            {{ form.descricao (class="form-control", rows="5")}}
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Prepended text-->
-
-                <!-- Prepended text-->
-
-
-                <!-- Search input-->
-
-                <!-- Button (Double) -->
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="Cadastrar"></label>
                     <div class="col-md-8">
