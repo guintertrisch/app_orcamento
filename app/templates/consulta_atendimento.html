@@ -97,6 +97,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Data do Último Atendimento</th>
+                <th scope="col">Descrição</th>
             </tr>
             </thead>
             <tbody>
@@ -106,6 +107,7 @@
                 <td>{{cliente.Cliente.nome}}</td>
                 <td>{{cliente.Cliente.telefone}}</td>
                 <td>{{cliente.Atendimentos.data_atendimento}}</td>
+                <td>{{cliente.Atendimentos.descricao}}</td>
             </tr>
             {%endfor%}
             </tbody>
