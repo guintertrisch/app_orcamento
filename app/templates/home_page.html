@@ -12,9 +12,12 @@
 
 <form action="" class="form-horizontal" method="POST">
     {{ form.csrf_token }}
+
     <fieldset>
+
         <div class="panel panel-primary">
-            <div class="panel-heading">Cadastro de Novos Clientes e Atendimentos</div>
+
+            <div class="panel-heading">Cadastro de Novos Clientes</div>
 
             <div class="panel-body">
                 <div class="form-group">
@@ -32,7 +35,7 @@
                     <div class="col-md-11 control-label">
                         <p class="help-block">
                             <h11>*</h11>
-                            Campo Obrigatório
+                            Campos Obrigatório
                         </p>
                     </div>
                 </div>
@@ -45,7 +48,9 @@
                     <div class="col-md-5">
                         {{ form.nome (class="form-control input-md")}}
                     </div>
+
                 </div>
+
 
                 <!-- Text input-->
                 <div class="form-group">
@@ -62,21 +67,25 @@
                     <div class="col-md-2">
                         {{ form.data_atendimento (placeholder="DD/MM/AAAA", class="form-control input-md")}}
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-1 control-label" for="Nome">Descrição
-                            <h11>*</h11>
-                        </label>
-                        <div class="col-md-3">
-                            {{ form.descricao (class="form-control", rows="5")}}
-                        </div>
+                </div>
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label" for="Nome">Descrição
+                        <h11>*</h11>
+                    </label>
+                    <div class="col-md-5">
+                        {{ form.descricao (class="form-control", rows="5")}}
                     </div>
+
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="Cadastrar"></label>
                     <div class="col-md-8">
-                        <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar</button>
+                        <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar
+                        </button>
                         <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
-                        <a href="{{ url_for('goto_atendimentos') }}" class="btn btn-success">Consultar Atendimentos</a>
+                        <a href="{{ url_for('goto_atendimentos') }}" class="btn btn-success">Consultar
+                            Atendimentos</a>
                     </div>
                 </div>
             </div>

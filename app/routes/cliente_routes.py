@@ -64,7 +64,7 @@ def consultar_periodo(periodo):
     return render_template('consulta_atendimento.html', cliente=cliente, form=form)
 
 
-@app.route("/atendimentos/consultas/filtro", methods=["POST"])
+@app.route("/atendimentos/consultas/filtro", methods=["POST", "GET"])
 def consultar_periodo_filtro():
     form = PesquisaForm()
     cliente = atendimentos.retorna_filtro_periodo(form)
