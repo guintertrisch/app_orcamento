@@ -42,10 +42,19 @@ def cadastar():
 @app.route("/", methods=["GET"])
 def home_page():
     form = CadastroForm()
+    form.nome.data = ''
+    form.telefone.data = ''
+    form.data_atendimento.data = ''
+    form.descricao.data = ''
     return render_template('home_page.html', form=form)
 
 
-@app.route("/atendimentos", methods=["GET"])
+@app.route("/atendimentos/cadastrar", methods=["GET", "POST"])
+def cadastrar_atendimentos():
+    return "<br>OK</br>"
+
+
+@app.route("/atendimentos/consultas", methods=["GET"])
 def goto_atendimentos():
     form = PesquisaForm()
     return render_template('consulta_atendimento.html', form=form)

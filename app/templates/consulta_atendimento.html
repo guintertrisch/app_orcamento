@@ -14,8 +14,11 @@
     {{ form.csrf_token }}
     <fieldset>
         <div class="panel panel-primary">
-            <div class="panel-heading">Consulta Atendimentos dos Clientes</div>
-
+            <nav class="navbar navbar-light">
+                <a href="{{ url_for('home_page') }}" class="navbar-brand">Clientes</a>
+                <a href="{{ url_for('cadastrar_atendimentos') }}" class="navbar-brand">Atendimentos</a>
+                <a href="{{ url_for('goto_atendimentos') }}" class="navbar-brand">Consultas</a>
+            </nav>
             <div class="panel-body">
                 <div class="form-group">
                     <!--

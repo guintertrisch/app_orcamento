@@ -16,8 +16,12 @@
     <fieldset>
 
         <div class="panel panel-primary">
+            <nav class="navbar navbar-light">
+                <a href="{{ url_for('home_page') }}" class="navbar-brand">Clientes</a>
+                <a href="{{ url_for('cadastrar_atendimentos') }}" class="navbar-brand">Atendimentos</a>
+                <a href="{{ url_for('goto_atendimentos') }}" class="navbar-brand">Consultas</a>
+            </nav>
 
-            <div class="panel-heading">Cadastro de Novos Clientes</div>
 
             <div class="panel-body">
                 <div class="form-group">
@@ -57,11 +61,11 @@
                     <label class="col-md-2 control-label" for="Nome">Telefone
                         <h11>*</h11>
                     </label>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         {{ form.telefone (placeholder="51 XXXXXXX", class="form-control input-md")}}
                     </div>
 
-                    <label class="col-md-1 control-label" for="Nome">Data Atendimento
+                    <label class="col-md-2 control-label" for="Nome">Data Atendimento
                         <h11>*</h11>
                     </label>
                     <div class="col-md-2">
@@ -70,7 +74,7 @@
                 </div>
                 <div class="form-group">
 
-                    <label class="col-md-2 control-label" for="Nome">Descrição
+                    <label class="col-md-2 control-label" for="Nome">Descrição Atendimento
                         <h11>*</h11>
                     </label>
                     <div class="col-md-5">
@@ -84,12 +88,31 @@
                         <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar
                         </button>
                         <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
-                        <a href="{{ url_for('goto_atendimentos') }}" class="btn btn-success">Consultar
-                            Atendimentos</a>
                     </div>
                 </div>
             </div>
         </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Data Atendimento</th>
+                <th scope="col">Descrição Atendimento</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">#</th>
+                <td>{{form.nome.data}}</td>
+                <td>{{form.telefone.data}}</td>
+                <td>{{form.data_atendimento.data}}</td>
+                <td>{{form.descricao.data}}</td>
+            </tr>
+
+            </tbody>
+        </table>
     </fieldset>
 </form>
 
