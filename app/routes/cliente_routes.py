@@ -2,7 +2,8 @@ from flask import render_template
 
 from app import app
 from app.controllers import clientes, atendimentos
-from app.forms.forms import CadastroForm, PesquisaForm
+from app.forms.forms import CadastroForm, PesquisaForm, AtendimentoForm
+from app.models.cliente import Cliente
 
 
 @app.route("/clientes", methods=["POST"])
@@ -18,7 +19,7 @@ def delete_cliente(id):
 @app.route("/clientes", methods=["GET"])
 def get_cliente():
     form = PesquisaForm()
-    return render_template('consulta_atendimento.html', form=form)
+    return render_template('consultar_atendimento.html', form=form)
     # return clientes.list_cliente()
 
 
@@ -49,15 +50,32 @@ def home_page():
     return render_template('home_page.html', form=form)
 
 
-@app.route("/atendimentos/cadastrar", methods=["GET", "POST"])
-def cadastrar_atendimentos():
-    return "<br>OK</br>"
+@app.route("/atendimentos/cadastrar", methods=["GET"])
+def home_atendimentos():
+    form = AtendimentoForm()
+    return render_template('atendimento.html', form=form)
+
+
+@app.route("/atendimentos/cadastrar", methods=["POST"])
+def busca_cliente():
+    form = AtendimentoForm()
+    cliente = clientes.pesquisar_cliente(form)
+    return render_template('atendimento.html', form=form, cliente=cliente)
+
+
+@app.route("/atendimentos/cadastrar/novo/<id>", methods=["GET"])
+def cadastrar_novo_atendimento(id):
+    form1 = CadastroForm()
+    cli = Cliente.query.get(id)
+    form1.nome.data = cli.nome
+    form1.telefone.data = cli.telefone
+    return render_template('novo_atendimento.html', form=form1)
 
 
 @app.route("/atendimentos/consultas", methods=["GET"])
 def goto_atendimentos():
     form = PesquisaForm()
-    return render_template('consulta_atendimento.html', form=form)
+    return render_template('consultar_atendimento.html', form=form)
 
 
 @app.route("/atendimentos/consultas/<periodo>", methods=["GET"])
@@ -69,12 +87,12 @@ def consultar_periodo(periodo):
         cliente = atendimentos.retorna_atendimentos_dose_meses()
     else:
         print('datas: ' + form.data_fim.data)
-        cliente = atendimentos.retorna_filtro_periodo(form)
-    return render_template('consulta_atendimento.html', cliente=cliente, form=form)
+        cliente = home_atendimentos.retorna_filtro_periodo(form)
+    return render_template('consultar_atendimento.html', cliente=cliente, form=form)
 
 
 @app.route("/atendimentos/consultas/filtro", methods=["POST", "GET"])
 def consultar_periodo_filtro():
     form = PesquisaForm()
     cliente = atendimentos.retorna_filtro_periodo(form)
-    return render_template('consulta_atendimento.html', cliente=cliente, form=form)
+    return render_template('consultar_atendimento.html', cliente=cliente, form=form)

@@ -14,3 +14,8 @@ class PesquisaForm(Form):
     nome = StringField()
     data_inicio = StringField(validators=[DataRequired()])
     data_fim = StringField(validators=[DataRequired()])
+
+
+class AtendimentoForm(Form):
+    nome = StringField()
+    telefone = StringField()

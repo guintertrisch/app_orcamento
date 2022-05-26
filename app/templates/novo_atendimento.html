@@ -9,16 +9,20 @@
 
 </head>
 <body>
-{% block content %}
-<form action="/atendimentos/consultas/filtro" class="form-horizontal" method="POST">
+
+<form action="" class="form-horizontal" method="POST">
     {{ form.csrf_token }}
+
     <fieldset>
+
         <div class="panel panel-primary">
             <nav class="navbar navbar-light">
                 <a href="{{ url_for('home_page') }}" class="navbar-brand">Clientes</a>
-                <a href="{{ url_for('cadastrar_atendimentos') }}" class="navbar-brand">Atendimentos</a>
+                <a href="{{ url_for('home_atendimentos') }}" class="navbar-brand">Atendimentos</a>
                 <a href="{{ url_for('goto_atendimentos') }}" class="navbar-brand">Consultas</a>
             </nav>
+
+
             <div class="panel-body">
                 <div class="form-group">
                     <!--
@@ -39,58 +43,53 @@
                         </p>
                     </div>
                 </div>
-
+                {% block content %}
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="Nome">Nome
+                        <h11>*</h11>
                     </label>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         {{ form.nome (class="form-control input-md")}}
                     </div>
+
                 </div>
+
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="Nome">Data Inicio
+                    <label class="col-md-2 control-label" for="Nome">Telefone
+                        <h11>*</h11>
+                    </label>
+                    <div class="col-md-1">
+                        {{ form.telefone (placeholder="51 XXXXXXX", class="form-control input-md")}}
+                    </div>
+
+                    <label class="col-md-2 control-label" for="Nome">Data Atendimento
                         <h11>*</h11>
                     </label>
                     <div class="col-md-2">
-                        {{ form.data_inicio (placeholder="DD/MM/AAAA", class="form-control input-md")}}
+                        {{ form.data_atendimento (placeholder="DD/MM/AAAA", class="form-control input-md")}}
                     </div>
-                    <label class="col-md-2 control-label" for="Nome">Data Fim
-                        <h11>*</h11>
-                    </label>
-                    <div class="col-md-2">
-                        {{ form.data_fim (placeholder="DD/MM/AAAA", class="form-control input-md")}}
-                    </div>
-
-                    <!-- Multiple Radios (inline) -->
-
                 </div>
-
-                <!-- Prepended text-->
-
-                <!-- Prepended text-->
-
-
-                <!-- Search input-->
-
-                <!-- Button (Double) -->
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="Consultar"></label>
+
+                    <label class="col-md-2 control-label" for="Nome">Descrição Atendimento
+                        <h11>*</h11>
+                    </label>
+                    <div class="col-md-5">
+                        {{ form.descricao (class="form-control", rows="5")}}
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Cadastrar"></label>
                     <div class="col-md-8">
-                        <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Consultar</button>
-                        <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
-                        <a href="{{ url_for('consultar_periodo',periodo='seis_meses') }}"
-                           class="btn btn-success">Últimos 6
-                            Meses</a>
-                        <a href="{{ url_for('consultar_periodo',periodo='doze_meses') }}"
-                           class="btn btn-success">Últimos 12
-                            Meses</a>
+                        <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar
                         </button>
+                        <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
                     </div>
                 </div>
-
             </div>
         </div>
         <table class="table">
@@ -100,19 +99,18 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Data Atendimento</th>
-                <th scope="col">Descrição</th>
+                <th scope="col">Descrição Atendimento</th>
             </tr>
             </thead>
             <tbody>
-            {%for cliente in cliente%}
             <tr>
-                <th scope="row">{{cliente.Cliente.id}}</th>
-                <td>{{cliente.Cliente.nome}}</td>
-                <td>{{cliente.Cliente.telefone}}</td>
-                <td>{{cliente.Atendimentos.data_atendimento}}</td>
-                <td>{{cliente.Atendimentos.descricao}}</td>
+                <th scope="row">#</th>
+                <td>{{form.nome.data}}</td>
+                <td>{{form.telefone.data}}</td>
+                <td>{{form.data_atendimento.data}}</td>
+                <td>{{form.descricao.data}}</td>
             </tr>
-            {%endfor%}
+
             </tbody>
         </table>
     </fieldset>

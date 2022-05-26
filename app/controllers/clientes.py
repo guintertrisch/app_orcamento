@@ -55,11 +55,10 @@ def update_cliente():
         return jsonify({'MSG': 'Cliente atualizado com sucesso', 'dado': id_request}), 201
 
 
-def pesquisar_cliente(nome):
+def pesquisar_cliente(form):
     try:
-        cliente = ClienteSchema(many=True)
-        cli = Cliente.query.filter(Cliente.nome.ilike('%' + nome + '%'))
-        return cliente.dumps(cli)
+        cli = Cliente.query.filter(Cliente.nome.ilike('%' + form.nome.data + '%'))
+        return cli
     except:
         return jsonify({'MSG': 'Nao foi possivel encontrar cliente'}), 404
 

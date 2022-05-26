@@ -37,3 +37,7 @@ def retorna_filtro_periodo(form):
                                                   datetime.strptime(form.data_fim.data, '%d/%m/%Y').date())).order_by(
             desc(Atendimentos.data_atendimento))
     return cliente
+
+
+def insere_novo_atendimento(form):
+    pass

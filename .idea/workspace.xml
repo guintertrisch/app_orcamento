@@ -7,9 +7,10 @@
     <list default="true" id="fcb2662c-4f68-49af-9599-7fe54cf91ef5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/atendimentos.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/atendimentos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/clientes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/cliente_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/cliente_routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/consulta_atendimento.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/consulta_atendimento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/consulta_atendimento.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/consultar_atendimento.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/home_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage.db" afterDir="false" />
     </list>
@@ -21,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -151,11 +152,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;/home/guinter/Documents/projetos-git/app_orcamento/app/templates&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "last_opened_file_path": "/home/guinter/Documents/projetos-git/app_orcamento/app/templates"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/templates" />
