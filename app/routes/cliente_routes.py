@@ -1,4 +1,5 @@
 from flask import render_template
+from flask import request
 
 from app import app
 from app.controllers import clientes, atendimentos
@@ -63,13 +64,17 @@ def busca_cliente():
     return render_template('atendimento.html', form=form, cliente=cliente)
 
 
-@app.route("/atendimentos/cadastrar/novo/<id>", methods=["GET"])
+@app.route("/atendimentos/cadastrar/novo/<id>", methods=["GET", "POST"])
 def cadastrar_novo_atendimento(id):
     form1 = CadastroForm()
-    cli = Cliente.query.get(id)
-    form1.nome.data = cli.nome
-    form1.telefone.data = cli.telefone
-    return render_template('novo_atendimento.html', form=form1)
+    if request.method == 'POST':
+        atendimentos.insere_novo_atendimento(form1, id)
+        return render_template('novo_atendimento.html', form=form1)
+    else:
+        cli = Cliente.query.get(id)
+        form1.nome.data = cli.nome
+        form1.telefone.data = cli.telefone
+        return render_template('novo_atendimento.html', form=form1)
 
 
 @app.route("/atendimentos/consultas", methods=["GET"])

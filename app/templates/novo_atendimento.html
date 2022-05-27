@@ -49,8 +49,8 @@
                     <label class="col-md-2 control-label" for="Nome">Nome
                         <h11>*</h11>
                     </label>
-                    <div class="col-md-5">
-                        {{ form.nome (class="form-control input-md")}}
+                    <div class="col-md-5" >
+                        {{ form.nome (class="form-control input-md",readonly="readonly" )}}
                     </div>
 
                 </div>
@@ -62,7 +62,7 @@
                         <h11>*</h11>
                     </label>
                     <div class="col-md-1">
-                        {{ form.telefone (placeholder="51 XXXXXXX", class="form-control input-md")}}
+                        {{ form.telefone (placeholder="51 XXXXXXX", class="form-control input-md", readonly="readonly")}}
                     </div>
 
                     <label class="col-md-2 control-label" for="Nome">Data Atendimento

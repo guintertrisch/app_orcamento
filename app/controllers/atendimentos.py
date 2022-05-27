@@ -39,5 +39,9 @@ def retorna_filtro_periodo(form):
     return cliente
 
 
-def insere_novo_atendimento(form):
-    pass
+def insere_novo_atendimento(form, id):
+    # adiciona atendimento
+    atendimento = Atendimentos(data_atendimento=datetime.strptime(form.data_atendimento.data, '%d/%m/%Y').date(),
+                               descricao=form.descricao.data, cliente_id=id)
+    db.session.add(atendimento)
+    db.session.commit()
