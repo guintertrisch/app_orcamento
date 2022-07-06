@@ -19,3 +19,7 @@ class PesquisaForm(Form):
 class AtendimentoForm(Form):
     nome = StringField()
     telefone = StringField()
+
+
+class ClienteForm(Form):
+    nome = StringField()

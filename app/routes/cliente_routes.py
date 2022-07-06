@@ -3,7 +3,7 @@ from flask import request
 
 from app import app
 from app.controllers import clientes, atendimentos
-from app.forms.forms import CadastroForm, PesquisaForm, AtendimentoForm
+from app.forms.forms import CadastroForm, PesquisaForm, AtendimentoForm, ClienteForm
 from app.models.cliente import Cliente
 
 
@@ -34,15 +34,24 @@ def pesquisar_cliente(nome):
     return clientes.pesquisar_cliente(nome)
 
 
-@app.route("/", methods=["POST"])
+@app.route("/clientes/cadastrar", methods=["POST"])
 def cadastar():
     form = CadastroForm()
     clientes.insert_cliente(form)
     return render_template('home_page.html', form=form)
 
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["GET", "POST"])
 def home_page():
+    form = ClienteForm()
+    if request.method == 'POST':
+        cliente = clientes.pesquisar_cliente(form)
+        return render_template('consultar_cliente.html', form=form, cliente=cliente)
+    return render_template('consultar_cliente.html', form=form)
+
+
+@app.route("/clientes/cadastrar", methods=["GET"])
+def home_cadastrar():
     form = CadastroForm()
     form.nome.data = ''
     form.telefone.data = ''
@@ -76,6 +85,9 @@ def cadastrar_novo_atendimento(id):
         form1.telefone.data = cli.telefone
         return render_template('novo_atendimento.html', form=form1)
 
+@app.route("/clientes/editar/<id>", methods=["GET", "POST"])
+def editar_cliente(id):
+    pass
 
 @app.route("/atendimentos/consultas", methods=["GET"])
 def goto_atendimentos():
